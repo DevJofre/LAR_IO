@@ -1,26 +1,96 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import InputSection from './components/InputSection';
+import SummaryContent from './components/SummaryContent';
+import FinancingTable from './components/FinancingTable';
+import RentTable from './components/RentTable';
+import TabButton from './components/TabButton';
+import { calculatePriceFinancing, calculateRent } from './utils/financial';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    Filler,
+} from 'chart.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    Filler
+);
+
+interface ResultsState {
+    financingData: any;
+    rentData: any;
 }
 
-export default App;
+export default function App() {
+    const [inputs, setInputs] = useState({
+        valorImovel: '300000',
+        valorEntrada: '100000',
+        valorSubsidio: '55000',
+        jurosAnual: '7',
+        prazoAnos: '35',
+        aluguelInicial: '1500',
+        reajusteAnual: '6',
+    });
+    const [results, setResults] = useState<ResultsState | null>(null);
+    const [activeTab, setActiveTab] = useState('summary');
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setInputs(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleCompare = () => {
+        const numericInputs = Object.fromEntries(
+            Object.entries(inputs).map(([key, value]) => [key, parseFloat(value) || 0])
+        );
+        const financingData = calculatePriceFinancing(numericInputs);
+        const rentData = calculateRent(numericInputs);
+
+        if (financingData.error || rentData.error) {
+            alert(financingData.error || rentData.error);
+            return;
+        }
+
+        setResults({ financingData, rentData });
+    };
+
+    return (
+        <div>
+            <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+                <Header />
+                <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} />
+                
+                {results && (
+                    <div className="mt-10">
+                        <div className="border-b border-gray-200 mb-6">
+                            <nav className="-mb-px flex space-x-6" aria-label="Tabs">
+                                <TabButton id="summary" activeTab={activeTab} setActiveTab={setActiveTab}>Resumo Comparativo</TabButton>
+                                <TabButton id="financing" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Financiamento</TabButton>
+                                <TabButton id="rent" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Aluguel</TabButton>
+                            </nav>
+                        </div>
+                        
+                        <div>
+                            {activeTab === 'summary' && <SummaryContent financingData={results.financingData} rentData={results.rentData} inputs={inputs} />}
+                            {activeTab === 'financing' && <FinancingTable data={results.financingData.parcelas} />}
+                            {activeTab === 'rent' && <RentTable data={results.rentData.pagamentos} />}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
