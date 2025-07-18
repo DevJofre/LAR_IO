@@ -17,24 +17,25 @@
 }
 
 .summaryCard {
-  background-color: #f9fafb;
+  background-color: var(--secondary-color);
   padding: 1.5rem;
   border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
 }
 
 .cardTitle {
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: var(--text-color);
 }
 
 .titleFinancing {
-  color: #3b82f6;
+  color: var(--button-background);
 }
 
 .titleRent {
-  color: #16a34a;
+  color: var(--button-hover-background);
 }
 
 .summaryList {
@@ -48,26 +49,26 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: #4b5563;
+  color: var(--text-light-color);
 }
 
 .summaryItem strong {
   font-weight: 600;
   font-size: 1rem;
-  color: #1f2937;
+  color: var(--text-color);
 }
 
 .chartContainer {
-  background-color: #f9fafb;
+  background-color: var(--secondary-color);
   padding: 1.5rem;
   border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
 }
 
 .chartTitle {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-color);
   margin-bottom: 1rem;
   text-align: center;
 }

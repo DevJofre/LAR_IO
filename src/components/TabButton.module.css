@@ -2,7 +2,7 @@
   padding: 1rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--text-light-color);
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -12,10 +12,10 @@
 }
 
 .tabButton:hover {
-  color: #3b82f6;
+  color: var(--button-background);
 }
 
 .active {
-  color: #3b82f6;
-  border-bottom-color: #3b82f6;
+  color: var(--button-background);
+  border-bottom-color: var(--button-background);
 }

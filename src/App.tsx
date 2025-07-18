@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from './components/Header';
 import InputSection from './components/InputSection';
 import SummaryContent from './components/SummaryContent';
@@ -18,6 +18,7 @@ import {
     Legend,
     Filler,
 } from 'chart.js';
+import { ThemeProvider, ThemeContext } from './utils/ThemeContext';
 
 ChartJS.register(
     CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler
@@ -28,7 +29,13 @@ interface ResultsState {
     rentData: any;
 }
 
-export default function App() {
+function AppContent() {
+    const { theme } = useContext(ThemeContext);
+
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
+
     const [inputs, setInputs] = useState({
         valorImovel: '300000',
         valorEntrada: '100000',
@@ -85,5 +92,13 @@ export default function App() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function App() {
+    return (
+        <ThemeProvider>
+            <AppContent />
+        </ThemeProvider>
     );
 }

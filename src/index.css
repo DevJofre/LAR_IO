@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Theme variables */
+body.light {
+  --background-color: #f0f2f5;
+  --primary-color: #ffffff;
+  --secondary-color: #e0e0e0;
+  --text-color: #333333;
+  --text-light-color: #666666;
+  --border-color: #cccccc;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --button-background: #007bff;
+  --button-text: #ffffff;
+  --button-hover-background: #0056b3;
+  --chart-line-color: #007bff;
+  --chart-fill-color: rgba(0, 123, 255, 0.1);
+  --table-header-bg: #f8f9fa;
+  --table-row-hover-bg: #f1f1f1;
+}
+
+body.dark {
+  --background-color: #282c34;
+  --primary-color: #3a3f47;
+  --secondary-color: #4a4f57;
+  --text-color: #e0e0e0;
+  --text-light-color: #b0b0b0;
+  --border-color: #555555;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --button-background: #61dafb;
+  --button-text: #282c34;
+  --button-hover-background: #21a1f1;
+  --chart-line-color: #61dafb;
+  --chart-fill-color: rgba(97, 218, 251, 0.1);
+  --table-header-bg: #4a4f57;
+  --table-row-hover-bg: #5a5f67;
+}
