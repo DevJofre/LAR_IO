@@ -6,6 +6,7 @@ import FinancingTable from './components/FinancingTable';
 import RentTable from './components/RentTable';
 import TabButton from './components/TabButton';
 import { calculatePriceFinancing, calculateRent } from './utils/financial';
+import styles from './App.module.css';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -19,14 +20,7 @@ import {
 } from 'chart.js';
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    Filler
+    CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler
 );
 
 interface ResultsState {
@@ -65,25 +59,24 @@ export default function App() {
         }
 
         setResults({ financingData, rentData });
+        setActiveTab('summary');
     };
 
     return (
-        <div>
-            <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+        <div className={styles.app}>
+            <div className={styles.container}>
                 <Header />
                 <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} />
                 
                 {results && (
-                    <div className="mt-10">
-                        <div className="border-b border-gray-200 mb-6">
-                            <nav className="-mb-px flex space-x-6" aria-label="Tabs">
-                                <TabButton id="summary" activeTab={activeTab} setActiveTab={setActiveTab}>Resumo Comparativo</TabButton>
-                                <TabButton id="financing" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Financiamento</TabButton>
-                                <TabButton id="rent" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Aluguel</TabButton>
-                            </nav>
-                        </div>
+                    <div className={styles.resultsSection}>
+                        <nav className={styles.tabsNav}>
+                            <TabButton id="summary" activeTab={activeTab} setActiveTab={setActiveTab}>Resumo Comparativo</TabButton>
+                            <TabButton id="financing" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Financiamento</TabButton>
+                            <TabButton id="rent" activeTab={activeTab} setActiveTab={setActiveTab}>Detalhes do Aluguel</TabButton>
+                        </nav>
                         
-                        <div>
+                        <div className={styles.tabContent}>
                             {activeTab === 'summary' && <SummaryContent financingData={results.financingData} rentData={results.rentData} inputs={inputs} />}
                             {activeTab === 'financing' && <FinancingTable data={results.financingData.parcelas} />}
                             {activeTab === 'rent' && <RentTable data={results.rentData.pagamentos} />}

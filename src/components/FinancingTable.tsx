@@ -1,15 +1,18 @@
 import React from 'react';
 import { formatCurrency } from '../utils/financial';
+import styles from './Table.module.css'; // Importa o CSS reutilizável
 
 interface FinancingTableProps {
     data: any[];
 }
 
 const FinancingTable: React.FC<FinancingTableProps> = ({ data }) => (
-    <div>
-        <h3>Tabela de Amortização (Price)</h3>
-        <div>
-            <table>
+    <div className={styles.tableContainer}>
+        <h3 className={`${styles.tableTitle} ${styles.titleBlue}`}>
+            Tabela de Amortização
+        </h3>
+        <div className={styles.tableWrapper}>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>Mês</th>
@@ -19,13 +22,13 @@ const FinancingTable: React.FC<FinancingTableProps> = ({ data }) => (
                         <th>Saldo Devedor</th>
                     </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody>
                     {data.map(p => (
                         <tr key={p.numero}>
                             <td>{p.numero}</td>
                             <td>{formatCurrency(p.valorParcela)}</td>
-                            <td>{formatCurrency(p.juros)}</td>
-                            <td>{formatCurrency(p.amortizacao)}</td>
+                            <td className={styles.textRed}>{formatCurrency(p.juros)}</td>
+                            <td className={styles.textGreen}>{formatCurrency(p.amortizacao)}</td>
                             <td>{formatCurrency(p.saldoDevedor)}</td>
                         </tr>
                     ))}

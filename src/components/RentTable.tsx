@@ -1,15 +1,18 @@
 import React from 'react';
 import { formatCurrency } from '../utils/financial';
+import styles from './Table.module.css'; // Importa o mesmo CSS reutilizável
 
 interface RentTableProps {
     data: any[];
 }
 
 const RentTable: React.FC<RentTableProps> = ({ data }) => (
-     <div>
-        <h3>Projeção de Custos do Aluguel</h3>
-        <div>
-            <table>
+    <div className={styles.tableContainer}>
+        <h3 className={`${styles.tableTitle} ${styles.titleGreen}`}>
+            Projeção de Custos do Aluguel
+        </h3>
+        <div className={styles.tableWrapper}>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>Ano</th>

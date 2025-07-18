@@ -1,0 +1,21 @@
+.tabButton {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+
+.tabButton:hover {
+  color: #3b82f6;
+}
+
+.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
