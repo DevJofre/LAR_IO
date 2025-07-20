@@ -6,15 +6,16 @@ interface InputSectionProps {
   inputs: any;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCompare: () => void;
+  errorEntrada: string;
 }
 
-const InputSection: React.FC<InputSectionProps> = ({ inputs, handleInputChange, handleCompare }) => (
+const InputSection: React.FC<InputSectionProps> = ({ inputs, handleInputChange, handleCompare, errorEntrada }) => (
   <div className={styles.container}>
     <div className={styles.grid}>
       <div className={styles.column}>
         <h2 className={`${styles.title} ${styles.titleFinancing}`}>Dados do Financiamento</h2>
         <InputField id="valorImovel" label="Valor do Imóvel (R$)" value={inputs.valorImovel} onChange={handleInputChange} placeholder="300000" />
-        <InputField id="valorEntrada" label="Valor da Entrada (R$)" value={inputs.valorEntrada} onChange={handleInputChange} placeholder="100000" />
+        <InputField id="valorEntrada" label="Valor da Entrada (R$)" value={inputs.valorEntrada} onChange={handleInputChange} placeholder="100000" error={errorEntrada} />
         <InputField id="valorSubsidio" label="Subsídio (R$)" value={inputs.valorSubsidio} onChange={handleInputChange} placeholder="55000" />
         <InputField id="jurosAnual" label="Taxa de Juros Anual (%)" value={inputs.jurosAnual} onChange={handleInputChange} placeholder="7" />
         <InputField id="prazoAnos" label="Prazo (anos)" value={inputs.prazoAnos} onChange={handleInputChange} placeholder="35" />

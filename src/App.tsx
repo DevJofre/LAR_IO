@@ -36,27 +36,53 @@ function AppContent() {
         document.body.className = theme;
     }, [theme]);
 
-    const [inputs, setInputs] = useState({
-        valorImovel: '300000',
-        valorEntrada: '100000',
-        valorSubsidio: '55000',
-        jurosAnual: '7',
-        prazoAnos: '35',
-        aluguelInicial: '1500',
-        reajusteAnual: '6',
+    const [inputs, setInputs] = useState(() => {
+        const valorImovel = 300000;
+        const valorEntrada = valorImovel * 0.20;
+        return {
+            valorImovel: valorImovel.toString(),
+            valorEntrada: valorEntrada.toString(),
+            valorSubsidio: '55000',
+            jurosAnual: '7',
+            prazoAnos: '35',
+            aluguelInicial: '1500',
+            reajusteAnual: '6',
+        };
     });
     const [results, setResults] = useState<ResultsState | null>(null);
     const [activeTab, setActiveTab] = useState('summary');
+    const [errorEntrada, setErrorEntrada] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setInputs(prev => ({ ...prev, [name]: value }));
+
+        if (name === 'valorImovel') {
+            const valorImovel = parseFloat(value) || 0;
+            const valorEntrada = valorImovel * 0.20;
+            setInputs(prev => ({
+                ...prev,
+                [name]: value,
+                valorEntrada: valorEntrada.toString(),
+            }));
+        } else {
+            setInputs(prev => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleCompare = () => {
         const numericInputs = Object.fromEntries(
             Object.entries(inputs).map(([key, value]) => [key, parseFloat(value) || 0])
         );
+
+        const { valorImovel, valorEntrada } = numericInputs;
+        const minEntrada = valorImovel * 0.20;
+
+        if (valorEntrada < minEntrada) {
+            setErrorEntrada(`O valor da entrada deve ser de no mínimo 20% do valor do imóvel (R$ ${minEntrada.toFixed(2)}).`);
+            return;
+        }
+
+        setErrorEntrada('');
         const financingData = calculatePriceFinancing(numericInputs);
         const rentData = calculateRent(numericInputs);
 
@@ -73,7 +99,7 @@ function AppContent() {
         <div className={styles.app}>
             <div className={styles.container}>
                 <Header />
-                <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} />
+                <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} errorEntrada={errorEntrada} />
                 
                 {results && (
                     <div className={styles.resultsSection}>

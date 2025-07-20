@@ -8,12 +8,14 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?: string;
+  error?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({ 
   id, 
   label, 
   type = 'text', 
+  error,
   ...props 
 }) => (
   <div className={styles.fieldContainer}>
@@ -24,9 +26,10 @@ const InputField: React.FC<InputFieldProps> = ({
       id={id} 
       name={id} 
       type={type}
-      className={styles.input}
+      className={`${styles.input} ${error ? styles.inputError : ''}`}
       {...props}
     />
+    {error && <span className={styles.errorMessage}>{error}</span>}
   </div>
 );
 
