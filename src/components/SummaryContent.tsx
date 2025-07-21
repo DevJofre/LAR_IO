@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Line } from 'react-chartjs-2';
 import { formatCurrency } from '../utils/financial';
 import { ChartOptions } from 'chart.js';
 import styles from './SummaryContent.module.css';
+import { ThemeContext } from '../utils/ThemeContext';
 
 interface SummaryContentProps {
     financingData: any;
@@ -11,6 +12,11 @@ interface SummaryContentProps {
 }
 
 const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData, inputs }) => {
+    const { theme } = useContext(ThemeContext);
+
+    const tickColor = theme === 'dark' ? '#e0e0e0' : '#333333';
+    const gridColor = theme === 'dark' ? '#555555' : '#e5e7eb';
+
     const chartData = {
         labels: Array.from({ length: parseInt(inputs.prazoAnos) }, (_, i) => `Ano ${i + 1}`),
         datasets: [
@@ -25,7 +31,7 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
             {
                 label: 'Custo Total do Aluguel',
                 data: rentData.custoAcumulado,
-                borderColor: '#16a34a',
+                borderColor: '#fc0000ff',
                 backgroundColor: 'rgba(22, 163, 74, 0.1)',
                 fill: true,
                 tension: 0.3,
@@ -36,7 +42,12 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
     const chartOptions: ChartOptions<"line"> = {
         responsive: true,
         plugins: {
-            legend: { position: 'top' },
+            legend: {
+                position: 'top',
+                labels: {
+                    color: tickColor,
+                }
+            },
             tooltip: {
                 callbacks: {
                     label: (context: any) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
@@ -44,11 +55,19 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
             }
         },
         scales: {
-            y: { 
-                ticks: { callback: (value: any) => formatCurrency(value) },
-                grid: { color: '#e5e7eb' }
+            y: {
+                ticks: {
+                    callback: (value: any) => formatCurrency(value),
+                    color: tickColor,
+                },
+                grid: { color: gridColor }
             },
-            x: { grid: { display: false } }
+            x: {
+                ticks: {
+                    color: tickColor,
+                },
+                grid: { display: false }
+            }
         }
     };
 
@@ -59,15 +78,15 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
                     <h3 className={`${styles.cardTitle} ${styles.titleFinancing}`}>Resumo do Financiamento (Price)</h3>
                     <div className={styles.summaryList}>
                         <div className={styles.summaryItem}>
-                            <span>Valor da Parcela Mensal:</span> 
+                            <span>Valor da Parcela Mensal:</span>
                             <strong>{formatCurrency(financingData.parcelaMensal)}</strong>
                         </div>
                         <div className={styles.summaryItem}>
-                            <span>Total de Juros Pagos:</span> 
+                            <span>Total de Juros Pagos:</span>
                             <strong>{formatCurrency(financingData.totalJuros)}</strong>
                         </div>
                         <div className={styles.summaryItem}>
-                            <span>Custo Total (Financiado + Juros):</span> 
+                            <span>Custo Total (Financiado + Juros):</span>
                             <strong>{formatCurrency(financingData.totalPago)}</strong>
                         </div>
                     </div>
@@ -77,15 +96,15 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
                     <h3 className={`${styles.cardTitle} ${styles.titleRent}`}>Resumo do Aluguel</h3>
                     <div className={styles.summaryList}>
                          <div className={styles.summaryItem}>
-                            <span>Aluguel no último ano:</span> 
+                            <span>Aluguel no último ano:</span>
                             <strong>{formatCurrency(rentData.aluguelFinal)}</strong>
                         </div>
                         <div className={styles.summaryItem}>
-                            <span>Prazo considerado:</span> 
+                            <span>Prazo considerado:</span>
                             <strong>{inputs.prazoAnos} anos</strong>
                         </div>
                         <div className={styles.summaryItem}>
-                            <span>Custo Total no Período:</span> 
+                            <span>Custo Total no Período:</span>
                             <strong>{formatCurrency(rentData.totalPago)}</strong>
                         </div>
                     </div>
