@@ -28,6 +28,7 @@ body.light {
   --chart-fill-color: rgba(0, 123, 255, 0.1);
   --table-header-bg: #f8f9fa;
   --table-row-hover-bg: #f1f1f1;
+  --input-background-color: #ffffff;
 }
 
 body.dark {
@@ -45,4 +46,5 @@ body.dark {
   --chart-fill-color: rgba(97, 218, 251, 0.1);
   --table-header-bg: #4a4f57;
   --table-row-hover-bg: #5a5f67;
+  --input-background-color: #6d7279ff;
 }
