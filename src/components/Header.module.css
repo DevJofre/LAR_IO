@@ -33,6 +33,12 @@
   font-size: 1.2rem;
 }
 
+@media (max-width: 767px) {
+  .themeToggleContainer {
+    top: -10px; 
+  }
+}
+
 .switchWrapper {
   position: relative;
   top: -8px; 
