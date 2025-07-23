@@ -9,6 +9,7 @@ interface InputFieldProps {
   placeholder?: string;
   type?: string;
   error?: string;
+  helpText?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({ 
@@ -16,12 +17,21 @@ const InputField: React.FC<InputFieldProps> = ({
   label, 
   type = 'text', 
   error,
+  helpText,
   ...props 
 }) => (
   <div className={styles.fieldContainer}>
-    <label htmlFor={id} className={styles.label}>
-      {label}
-    </label>
+    <div className={styles.labelContainer}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+      {helpText && (
+        <div className={styles.helpContainer}>
+          <span className={styles.helpIcon}>?</span>
+          <div className={styles.tooltip}>{helpText}</div>
+        </div>
+      )}
+    </div>
     <input 
       id={id} 
       name={id} 
