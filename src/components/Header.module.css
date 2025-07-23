@@ -4,6 +4,10 @@
   padding: 20px;
   text-align: center;
   position: relative; /* Para posicionar o botão */
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  margin-bottom: 2rem;
 }
 
 .mainTitle {
