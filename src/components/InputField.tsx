@@ -8,10 +8,10 @@ interface InputFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: string;
   error?: string;
   helpText?: string;
   isCurrency?: boolean;
+  isNumeric?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -19,10 +19,10 @@ const InputField: React.FC<InputFieldProps> = ({
   label,
   value,
   onChange,
-  type = 'text',
   error,
   helpText,
   isCurrency = false,
+  isNumeric = false,
   ...props
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,10 +51,15 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         id={id}
         name={id}
-        type={isCurrency ? 'tel' : type}
+        type={isNumeric ? 'number' : (isCurrency ? 'tel' : 'text')}
         className={`${styles.input} ${error ? styles.inputError : ''}`}
         value={displayValue}
         onChange={handleChange}
+        onKeyPress={(event) => {
+          if (isNumeric && !/[0-9]/.test(event.key) && event.key !== 'Backspace' && event.key !== 'Delete' && event.key !== 'Tab' && event.key !== 'Enter') {
+            event.preventDefault();
+          }
+        }}
         {...props}
       />
       {error && <span className={styles.errorMessage}>{error}</span>}
