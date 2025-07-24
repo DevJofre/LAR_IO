@@ -63,12 +63,17 @@
   padding: 1.5rem;
   border-radius: 0.75rem;
   border: 1px solid var(--border-color);
+  position: relative; /* Essencial para o height: 100% do filho */
+  height: 400px; /* Altura padrão para o contêiner do gráfico */
 }
 
-.chartTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  text-align: center;
+.chartWrapper {
+  height: calc(100% - 2.5rem); /* Ocupa a altura restante do contêiner, descontando o título */
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .chartContainer {
+    height: 300px; /* Altura menor para mobile */
+  }
 }

@@ -41,6 +41,7 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
 
     const chartOptions: ChartOptions<"line"> = {
         responsive: true,
+        maintainAspectRatio: false, // Adicionado para responsividade
         plugins: {
             legend: {
                 position: 'top',
@@ -113,7 +114,9 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
 
             <div className={styles.chartContainer}>
                 <h3 className={styles.chartTitle}>Custo Total Acumulado ao Longo do Tempo</h3>
-                <Line data={chartData} options={chartOptions} />
+                <div className={styles.chartWrapper}> {/* Novo wrapper */} 
+                    <Line data={chartData} options={chartOptions} />
+                </div>
             </div>
         </div>
     );
