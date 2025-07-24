@@ -19,12 +19,12 @@
 }
 
 .inputError {
-    border-color: red;
+    border-color: var(--error-color);
 }
 
 
 .errorMessage {
-    color: red;
+    color: var(--error-color);
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }

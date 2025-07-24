@@ -1,6 +1,7 @@
 
-export const formatCurrency = (value: number) => 
-    new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+import { formatBRL } from './currency';
+
+export const formatCurrency = (value: number) => formatBRL(value);
 
 export const calculatePriceFinancing = (inputs: any) => {
     const valorFinanciado = inputs.valorImovel - inputs.valorEntrada - inputs.valorSubsidio;

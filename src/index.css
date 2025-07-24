@@ -29,6 +29,7 @@ body.light {
   --table-header-bg: #f8f9fa;
   --table-row-hover-bg: #f1f1f1;
   --input-background-color: #ffffff;
+  --error-color: #e53e3e; 
 }
 
 body.dark {
@@ -47,4 +48,5 @@ body.dark {
   --table-header-bg: #4a4f57;
   --table-row-hover-bg: #5a5f67;
   --input-background-color: #6d7279ff;
+  --error-color: #fc8181; 
 }

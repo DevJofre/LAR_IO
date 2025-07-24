@@ -37,15 +37,13 @@ function AppContent() {
     }, [theme]);
 
     const [inputs, setInputs] = useState(() => {
-        const valorImovel = 300000;
-        const valorEntrada = valorImovel * 0.20;
         return {
-            valorImovel: valorImovel.toString(),
-            valorEntrada: valorEntrada.toString(),
-            valorSubsidio: '55000',
+            valorImovel: '30000000',
+            valorEntrada: '6000000',
+            valorSubsidio: '5500000',
             jurosAnual: '7',
             prazoAnos: '35',
-            aluguelInicial: '1500',
+            aluguelInicial: '150000',
             reajusteAnual: '6',
         };
     });
@@ -56,13 +54,15 @@ function AppContent() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
+        setErrorEntrada('');
+
         if (name === 'valorImovel') {
             const valorImovel = parseFloat(value) || 0;
             const valorEntrada = valorImovel * 0.20;
             setInputs(prev => ({
                 ...prev,
                 [name]: value,
-                valorEntrada: valorEntrada.toString(),
+                valorEntrada: Math.round(valorEntrada).toString(),
             }));
         } else {
             setInputs(prev => ({ ...prev, [name]: value }));
@@ -70,12 +70,24 @@ function AppContent() {
     };
 
     const handleCompare = () => {
+        const currencyKeys = ['valorImovel', 'valorEntrada', 'valorSubsidio', 'aluguelInicial'];
         const numericInputs = Object.fromEntries(
-            Object.entries(inputs).map(([key, value]) => [key, parseFloat(value) || 0])
+            Object.entries(inputs).map(([key, value]) => {
+                const parsedValue = parseFloat(value) || 0;
+                if (currencyKeys.includes(key)) {
+                    return [key, parsedValue / 100];
+                }
+                return [key, parsedValue];
+            })
         );
 
         const { valorImovel, valorEntrada } = numericInputs;
         const minEntrada = valorImovel * 0.20;
+
+        if (valorEntrada > valorImovel) {
+            setErrorEntrada('O valor da entrada não pode ser maior que o valor do imóvel.');
+            return;
+        }
 
         if (valorEntrada < minEntrada) {
             setErrorEntrada(`O valor da entrada deve ser de no mínimo 20% do valor do imóvel (R$ ${minEntrada.toFixed(2)}).`);
