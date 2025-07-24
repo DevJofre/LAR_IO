@@ -19,3 +19,10 @@
   color: var(--button-background);
   border-bottom-color: var(--button-background);
 }
+
+@media (max-width: 768px) {
+  .tabButton {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}
