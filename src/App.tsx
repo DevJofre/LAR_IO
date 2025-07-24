@@ -27,6 +27,7 @@ ChartJS.register(
 interface ResultsState {
     financingData: any;
     rentData: any;
+    prazoAnos: number;
 }
 
 function AppContent() {
@@ -103,7 +104,7 @@ function AppContent() {
             return;
         }
 
-        setResults({ financingData, rentData });
+        setResults({ financingData, rentData, prazoAnos: numericInputs.prazoAnos });
         setActiveTab('summary');
     };
 
@@ -122,7 +123,7 @@ function AppContent() {
                         </nav>
                         
                         <div className={styles.tabContent}>
-                            {activeTab === 'summary' && <SummaryContent financingData={results.financingData} rentData={results.rentData} inputs={inputs} />}
+                            {activeTab === 'summary' && <SummaryContent financingData={results.financingData} rentData={results.rentData} prazoAnos={results.prazoAnos} />}
                             {activeTab === 'financing' && <FinancingTable data={results.financingData.parcelas} />}
                             {activeTab === 'rent' && <RentTable data={results.rentData.pagamentos} />}
                         </div>

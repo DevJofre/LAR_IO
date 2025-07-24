@@ -8,17 +8,17 @@ import { ThemeContext } from '../utils/ThemeContext';
 interface SummaryContentProps {
     financingData: any;
     rentData: any;
-    inputs: any;
+    prazoAnos: number;
 }
 
-const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData, inputs }) => {
+const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData, prazoAnos }) => {
     const { theme } = useContext(ThemeContext);
 
     const tickColor = theme === 'dark' ? '#e0e0e0' : '#333333';
     const gridColor = theme === 'dark' ? '#555555' : '#e5e7eb';
 
     const chartData = {
-        labels: Array.from({ length: parseInt(inputs.prazoAnos) }, (_, i) => `Ano ${i + 1}`),
+        labels: Array.from({ length: prazoAnos }, (_, i) => `Ano ${i + 1}`),
         datasets: [
             {
                 label: 'Custo Total do Financiamento',
@@ -102,7 +102,7 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
                         </div>
                         <div className={styles.summaryItem}>
                             <span>Prazo considerado:</span>
-                            <strong>{inputs.prazoAnos} anos</strong>
+                            <strong>{prazoAnos} anos</strong>
                         </div>
                         <div className={styles.summaryItem}>
                             <span>Custo Total no Período:</span>
