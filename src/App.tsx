@@ -51,11 +51,13 @@ function AppContent() {
     const [results, setResults] = useState<ResultsState | null>(null);
     const [activeTab, setActiveTab] = useState('summary');
     const [errorEntrada, setErrorEntrada] = useState('');
+    const [warningSubsidio, setWarningSubsidio] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
         setErrorEntrada('');
+        setWarningSubsidio('');
 
         if (name === 'valorImovel') {
             const valorImovel = parseFloat(value) || 0;
@@ -67,6 +69,13 @@ function AppContent() {
             }));
         } else {
             setInputs(prev => ({ ...prev, [name]: value }));
+        }
+
+        if (name === 'valorSubsidio') {
+            const valorSubsidio = parseFloat(value.replace(/\D/g, '')) || 0;
+            if (valorSubsidio > 5500000) {
+                setWarningSubsidio('O subsídio do governo geralmente não excede R$ 55.000. Valores maiores podem não ser realistas.');
+            }
         }
     };
 
@@ -112,7 +121,7 @@ function AppContent() {
         <div className={styles.app}>
             <div className={styles.container}>
                 <Header />
-                <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} errorEntrada={errorEntrada} />
+                <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} errorEntrada={errorEntrada} warningSubsidio={warningSubsidio} />
                 
                 {results && (
                     <div className={styles.resultsSection}>

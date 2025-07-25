@@ -9,6 +9,7 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   error?: string;
+  warning?: string; // Adicionando a propriedade de aviso
   helpText?: string;
   isCurrency?: boolean;
   isNumeric?: boolean;
@@ -20,6 +21,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   onChange,
   error,
+  warning, // Recebendo a propriedade de aviso
   helpText,
   isCurrency = false,
   isNumeric = false,
@@ -63,6 +65,7 @@ const InputField: React.FC<InputFieldProps> = ({
         {...props}
       />
       {error && <span className={styles.errorMessage}>{error}</span>}
+      {warning && <span className={styles.warningMessage}>{warning}</span>} {/* Exibindo o aviso */}
     </div>
   );
 };
