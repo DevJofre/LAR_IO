@@ -20,6 +20,7 @@ const InputSection: React.FC<InputSectionProps> = ({ inputs, handleInputChange, 
         <InputField id="valorSubsidio" label="Subsídio (R$)" value={inputs.valorSubsidio} onChange={handleInputChange} placeholder="55000" warning={warningSubsidio} helpText="O valor do subsídio não é o mesmo para todos. Ele depende principalmente da sua renda familiar mensal, que determina em qual faixa do programa Minha Casa, Minha Vida(2025), você se encaixa.(valor max: 55 mil)" isCurrency={true} />
         <InputField id="jurosAnual" label="Taxa de Juros Anual (%)" value={inputs.jurosAnual} onChange={handleInputChange} placeholder="7" helpText="A taxa de juros do Minha Casa, Minha Vida também está diretamente ligada à faixa de renda da família. Assim como no subsídio, a lógica é a mesma: o governo oferece um benefício maior para quem tem menor renda. (4% ate 12%, dependendo da faixa ou banco que ira financiar.) " isNumeric={true} />
         <InputField id="prazoAnos" label="Prazo (anos)" value={inputs.prazoAnos} onChange={handleInputChange} placeholder="35" isNumeric={true} />
+        <InputField id="itbi" label="ITBI (%)" value={inputs.itbi} onChange={handleInputChange} placeholder="3" helpText="O Imposto sobre a Transmissão de Bens Imóveis (ITBI) é um tributo municipal pago na compra de um imóvel. A alíquota varia de cidade para cidade, mas geralmente fica entre 2% e 3% do valor do imóvel." isNumeric={true} />
       </div>
 
       <div className={styles.column}>

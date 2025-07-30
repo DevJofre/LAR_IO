@@ -3,10 +3,12 @@ import { formatBRL } from './currency';
 
 export const formatCurrency = (value: number) => formatBRL(value);
 
+
 export const calculatePriceFinancing = (inputs: any) => {
     const valorFinanciado = inputs.valorImovel - inputs.valorEntrada - inputs.valorSubsidio;
     if (valorFinanciado <= 0) return { error: "O valor a ser financiado deve ser positivo." };
 
+    const itbiValue = inputs.valorImovel * (inputs.itbi / 100);
     const taxaJurosMensal = Math.pow(1 + inputs.jurosAnual / 100, 1.0 / 12.0) - 1;
     const prazoMeses = inputs.prazoAnos * 12;
 
@@ -34,16 +36,17 @@ export const calculatePriceFinancing = (inputs: any) => {
         });
         
         if (i % 12 === 0) {
-            custoAcumulado.push(valorFinanciado + totalJuros);
+            custoAcumulado.push(valorFinanciado + totalJuros + itbiValue);
         }
     }
 
     return {
         parcelas,
         totalJuros,
-        totalPago: valorFinanciado + totalJuros,
+        totalPago: valorFinanciado + totalJuros + itbiValue,
         parcelaMensal: pmt,
-        custoAcumulado
+        custoAcumulado,
+        itbi: itbiValue
     };
 };
 

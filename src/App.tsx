@@ -44,6 +44,7 @@ function AppContent() {
             valorSubsidio: '5500000',
             jurosAnual: '7',
             prazoAnos: '35',
+            itbi: '3',
             aluguelInicial: '150000',
             reajusteAnual: '6',
         };

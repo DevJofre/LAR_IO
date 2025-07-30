@@ -87,7 +87,11 @@ const SummaryContent: React.FC<SummaryContentProps> = ({ financingData, rentData
                             <strong>{formatCurrency(financingData.totalJuros)}</strong>
                         </div>
                         <div className={styles.summaryItem}>
-                            <span>Custo Total (Financiado + Juros):</span>
+                            <span>ITBI (Imposto):</span>
+                            <strong>{formatCurrency(financingData.itbi)}</strong>
+                        </div>
+                        <div className={styles.summaryItem}>
+                            <span>Custo Total (Financiado + Juros + ITBI):</span>
                             <strong>{formatCurrency(financingData.totalPago)}</strong>
                         </div>
                     </div>
