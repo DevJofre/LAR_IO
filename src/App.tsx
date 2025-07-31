@@ -19,7 +19,7 @@ import {
     Filler,
 } from 'chart.js';
 import { ThemeProvider, ThemeContext } from './utils/ThemeContext';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import CalculoDeInvestimento from './pages/CalculoDeInvestimento';
 
 ChartJS.register(
@@ -124,7 +124,7 @@ function AppContent() {
         <div className={styles.app}>
             <div className={styles.container}>
                 <Header />
-                
+
                 <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} errorEntrada={errorEntrada} warningSubsidio={warningSubsidio} />
                 
                 {results && (
