@@ -45,3 +45,19 @@
   display: flex;
   align-items: center;
 }
+
+.navButton {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.navButton:hover {
+  background-color: var(--accent-color-dark);
+}
