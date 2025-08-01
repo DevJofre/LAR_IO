@@ -1,0 +1,52 @@
+.formContainer {
+  background-color: var(--primary-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  margin-top: 1rem;
+}
+
+.inputsRow {
+  display: flex;
+  gap: 2rem; /* Espaçamento entre os campos */
+  align-items: flex-start; /* Alinha os itens no topo */
+}
+
+/* Faz com que cada campo ocupe o espaço disponível igualmente */
+.inputsRow > div {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .inputsRow {
+    flex-direction: column; /* Empilha os campos em telas menores */
+  }
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.calculateButton {
+  background-color: var(--button-background);
+  color: var(--button-text);
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calculateButton:hover {
+  background-color: var(--button-hover-background);
+}

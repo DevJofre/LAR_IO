@@ -18,6 +18,11 @@
     color: var(--text-color);
 }
 
+.input::placeholder {
+  color: var(--text-light-color);
+  opacity: 1; /* Firefox */
+}
+
 .inputError {
     border-color: var(--error-color);
 }
