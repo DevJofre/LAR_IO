@@ -30,6 +30,8 @@ body.light {
   --table-row-hover-bg: #f1f1f1;
   --input-background-color: #ffffff;
   --error-color: #e53e3e; 
+  --accent-color: #007bff;
+  --accent-color-dark: #0056b3;
 }
 
 body.dark {
@@ -49,4 +51,6 @@ body.dark {
   --table-row-hover-bg: #5a5f67;
   --input-background-color: #6d7279ff;
   --error-color: #fc8181; 
+  --accent-color: #61dafb;
+  --accent-color-dark: #21a1f1;
 }

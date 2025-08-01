@@ -1,29 +1,83 @@
 .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
   background-color: var(--primary-color);
   color: var(--text-color);
-  padding: 20px;
-  text-align: center;
-  position: relative; /* Para posicionar o botão */
-  border-radius: 1rem;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
-  margin-bottom: 2rem;
 }
 
-.mainTitle {
-  margin: 0;
-  font-size: 2.5em;
+.logo {
+  display: flex;
+  align-items: center;
 }
 
-.subtitle {
-  margin: 5px 0 0;
-  font-size: 1.2em;
+.logoText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 10px;
+  color: var(--text-color);
+}
+
+.navLinks {
+  display: flex;
+  gap: 30px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--text-light-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: var(--text-color);
+}
+
+.hamburger {
+  display: none; /* Escondido por padrão */
+  flex-direction: column;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: var(--text-color);
+  margin-bottom: 4px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .logoText {
+    display: none;
+  }
+
+  .navLinks {
+    display: none; /* Esconde os links */
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 80px; /* Altura do header */
+    left: 0;
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+  }
+
+  .navLinksMobileOpen {
+    display: flex; /* Mostra quando o menu está aberto */
+  }
+
+  .hamburger {
+    display: flex; /* Mostra o botão do sanduíche */
+  }
 }
 
 .themeToggleContainer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   display: flex;
   align-items: center;
   gap: 0.2rem;
@@ -33,31 +87,9 @@
   font-size: 1.2rem;
 }
 
-@media (max-width: 767px) {
-  .themeToggleContainer {
-    top: -10px; 
-  }
-}
-
 .switchWrapper {
   position: relative;
   top: -8px; 
   display: flex;
   align-items: center;
-}
-
-.navButton {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-  display: inline-block;
-}
-
-.navButton:hover {
-  background-color: var(--accent-color-dark);
 }

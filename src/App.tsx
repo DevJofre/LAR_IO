@@ -122,8 +122,8 @@ function AppContent() {
 
     return (
         <div className={styles.app}>
+            <Header />
             <div className={styles.container}>
-                <Header />
 
                 <InputSection inputs={inputs} handleInputChange={handleInputChange} handleCompare={handleCompare} errorEntrada={errorEntrada} warningSubsidio={warningSubsidio} />
                 
